@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-sage: #A9B9A0;
+    --color-forest: #254B35;
+    --color-ivory: #FAF8EF;
+    --color-cream: #F3EEDC;
+    --color-blush: #E8B9C1;
+    --color-burgundy: #862D46;
+    --color-gold: #C7A66A;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Custom scrollbar in champagne gold */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #FAF8EF;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #C7A66A;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #862D46;
+  }
+}
+
+/* Subtle Shimmer for Gold Accents */
+@keyframes goldShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.gold-shimmer-text {
+  background: linear-gradient(
+    90deg,
+    #862D46 0%,
+    #C7A66A 35%,
+    #e8d2a6 50%,
+    #C7A66A 65%,
+    #862D46 100%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: goldShimmer 7s linear infinite;
+}
+
+.gold-foil-border {
+  border: 1px solid rgba(199, 166, 106, 0.4);
+  box-shadow: 0 0 0 1px rgba(250, 248, 239, 0.8), 0 0 0 2px rgba(199, 166, 106, 0.25);
+}
+
+/* Petal animations */
+@keyframes petalFall {
+  0% {
+    opacity: 0;
+    transform: translate(0, -10px) rotate(0deg) scale(0.8);
+  }
+  15% {
+    opacity: 0.85;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(80px, 105vh) rotate(360deg) scale(1.1);
+  }
+}
+
+.falling-petal {
+  position: fixed;
+  top: -20px;
+  pointer-events: none;
+  z-index: 40;
+  animation-name: petalFall;
+  animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  animation-iteration-count: infinite;
+}
+
+/* Respect user's reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .falling-petal {
+    display: none !important;
+  }
+}
